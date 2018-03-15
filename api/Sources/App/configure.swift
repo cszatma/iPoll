@@ -14,14 +14,10 @@ public func configure(
     try services.register(FluentSQLiteProvider())
     try services.register(AuthenticationProvider())
 
-    // Register routes to the router
-    let router = EngineRouter.default()
-    try routes(router)
-    services.register(router, as: Router.self)
+
 
     // Register middleware
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
-    // middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
     middlewares.use(DateMiddleware.self) // Adds `Date` header to responses
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
     services.register(middlewares)
@@ -41,5 +37,11 @@ public func configure(
     // Configure the rest of your application here
 
     User.Public.defaultDatabase = .sqlite
+
+    // Register routes to the router
+    let router = EngineRouter.default()
+    try routes(router)
+    services.register(router, as: Router.self)
+
 
 }

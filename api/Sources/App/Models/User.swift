@@ -37,6 +37,9 @@ extension User.Public: Content {}
 
 extension User {
     // Add Children Later
+    var ownedCourses: Children<User, Course> {
+        return children(\.teacherID)
+    }
 }
 
 extension User: BasicAuthenticatable {

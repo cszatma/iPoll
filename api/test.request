@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>baseURL</key>
+	<string>http://localhost:8080/api/courses</string>
+	<key>followRedirect</key>
+	<true/>
+	<key>handleJSONPCallbacks</key>
+	<false/>
+	<key>headers</key>
+	<array>
+		<dict>
+			<key>header</key>
+			<string>Authorization</string>
+			<key>inUse</key>
+			<false/>
+			<key>value</key>
+			<string>Bearer FX1xJfOEBY4oKP2HY6IcAw==</string>
+		</dict>
+	</array>
+	<key>httpMethod</key>
+	<string>POST</string>
+	<key>jsonpScript</key>
+	<string></string>
+	<key>paramBodyUIChoice</key>
+	<integer>0</integer>
+	<key>parameters</key>
+	<array>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>username</string>
+			<key>value</key>
+			<string>Paul</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>studentNumber</string>
+			<key>value</key>
+			<string>500791964</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>password</string>
+			<key>value</key>
+			<string>password1</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>teacherID</string>
+			<key>value</key>
+			<string>40D66FE7-B3A8-45AC-B3C2-65716CD8DE82</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<true/>
+			<key>parameter</key>
+			<string>title</string>
+			<key>value</key>
+			<string>This is a title</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<true/>
+			<key>parameter</key>
+			<string>description</string>
+			<key>value</key>
+			<string>Hey this is my course....welcome i guess?</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<true/>
+			<key>parameter</key>
+			<string>courseCode</string>
+			<key>value</key>
+			<string>BS101</string>
+		</dict>
+	</array>
+	<key>parametersType</key>
+	<integer>1</integer>
+	<key>presentBeforeChallenge</key>
+	<false/>
+	<key>stringEncoding</key>
+	<integer>4</integer>
+	<key>usingHTTPBody</key>
+	<false/>
+</dict>
+</plist>

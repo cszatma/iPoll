@@ -7,6 +7,7 @@ struct UsersController: RouteCollection {
         usersRoutes.post(use: createHandler)
         usersRoutes.get(use: getAllHandler)
         usersRoutes.get(User.Public.parameter, use: getHandler)
+        usersRoutes.get(User.parameter, "ownedCourses", use: getOwnedCoursesHandler)
 
 
         let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptVerifier())
@@ -35,6 +36,12 @@ struct UsersController: RouteCollection {
         let user = try req.requireAuthenticated(User.self)
         let token = try Token.generate(for: user)
         return token.save(on: req)
+    }
+
+    func getOwnedCoursesHandler(_ req: Request) throws -> Future<[Course]> {
+        return try req.parameter(User.self).flatMap(to: [Course].self){ user in
+            return try user.ownedCourses.query(on: req).all()
+        }
     }
 
 }
