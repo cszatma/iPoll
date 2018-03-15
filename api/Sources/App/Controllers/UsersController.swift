@@ -38,6 +38,7 @@ struct UsersController: RouteCollection {
         return token.save(on: req)
     }
 
+    // To be Tested
     func getOwnedCoursesHandler(_ req: Request) throws -> Future<[Course]> {
         return try req.parameter(User.self).flatMap(to: [Course].self){ user in
             return try user.ownedCourses.query(on: req).all()

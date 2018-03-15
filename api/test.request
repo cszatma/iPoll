@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>baseURL</key>
-	<string>http://localhost:8080/api/courses</string>
+	<string>http://localhost:8080/api/courses/2</string>
 	<key>followRedirect</key>
 	<true/>
 	<key>handleJSONPCallbacks</key>
@@ -14,13 +14,13 @@
 			<key>header</key>
 			<string>Authorization</string>
 			<key>inUse</key>
-			<false/>
+			<true/>
 			<key>value</key>
-			<string>Bearer FX1xJfOEBY4oKP2HY6IcAw==</string>
+			<string>Bearer j5Qul14ygvbhCrpKZErl3A==</string>
 		</dict>
 	</array>
 	<key>httpMethod</key>
-	<string>POST</string>
+	<string>PUT</string>
 	<key>jsonpScript</key>
 	<string></string>
 	<key>paramBodyUIChoice</key>
@@ -55,21 +55,13 @@
 			<key>inUse</key>
 			<false/>
 			<key>parameter</key>
-			<string>teacherID</string>
-			<key>value</key>
-			<string>40D66FE7-B3A8-45AC-B3C2-65716CD8DE82</string>
-		</dict>
-		<dict>
-			<key>inUse</key>
-			<true/>
-			<key>parameter</key>
 			<string>title</string>
 			<key>value</key>
-			<string>This is a title</string>
+			<string>THis is a title 2</string>
 		</dict>
 		<dict>
 			<key>inUse</key>
-			<true/>
+			<false/>
 			<key>parameter</key>
 			<string>description</string>
 			<key>value</key>
@@ -77,9 +69,17 @@
 		</dict>
 		<dict>
 			<key>inUse</key>
-			<true/>
+			<false/>
 			<key>parameter</key>
 			<string>courseCode</string>
+			<key>value</key>
+			<string>BS104</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>term</string>
 			<key>value</key>
 			<string>BS101</string>
 		</dict>
