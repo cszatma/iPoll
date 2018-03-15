@@ -20,6 +20,14 @@ public func configure(
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
     middlewares.use(DateMiddleware.self) // Adds `Date` header to responses
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
+
+    // Setup CORS Middleware - Allow front-end origin
+    let corsConfig = CORSMiddleware.Configuration(
+            allowedOrigin: .custom("http://localhost:3000"),
+            allowedMethods: [.get, .post, .put, .options, .delete, .patch],
+            allowedHeaders: [.accept, .authorization, .contentType, .origin, .xRequestedWith]
+    )
+    middlewares.use(CORSMiddleware(configuration: corsConfig)) // Allow front-end access
     services.register(middlewares)
 
     // Configure a SQLite database
