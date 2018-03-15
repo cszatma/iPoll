@@ -1,0 +1,18 @@
+{
+  "name": "iPoll",
+  "version": "0.1.0",
+  "description": "CPS406 - Assignment : iPoll an iClicker Clone using Vapor and React",
+  "repository": "git@github.com:Chris-Bishop/iPoll.git",
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^3.5.1"
+  },
+  "scripts": {
+    "build-api": "cd api && vapor build",
+    "build-client": "cd client && yarn run build",
+    "build": "yarn run build-api && yarn run build-client",
+    "start-api": "yarn run build-api && cd api && vapor run",
+    "start-client": "cd client && yarn run start",
+    "start": "concurrently \"yarn run start-api\" \"yarn run start-client\""
+  }
+}
