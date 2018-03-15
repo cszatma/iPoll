@@ -18,6 +18,9 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 ; Extensions
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.json
 module.file_ext=.css
 module.file_ext=.scss
 module.file_ext=.sass
