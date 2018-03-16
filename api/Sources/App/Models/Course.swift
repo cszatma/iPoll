@@ -1,3 +1,7 @@
+//
+// Created by Chris Bishop on 2018-03-16.
+//
+
 import FluentSQLite
 import Vapor
 
@@ -24,5 +28,9 @@ extension Course: Migration {}
 extension Course {
     var teacher: Parent<Course, User> {
         return parent(\.teacherID)
+    }
+
+    var students: Siblings<Course, User, UserCoursePivot> {
+        return siblings()
     }
 }
