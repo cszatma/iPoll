@@ -4,8 +4,11 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.scss';
 
+import client from './Client';
+
 class App extends Component<{}> {
   render() {
+      client.request('users', 'get').then(json => console.log(json));
     return (
       <div className="App">
         <header className="App-header">
