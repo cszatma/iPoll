@@ -14,6 +14,17 @@ class Client {
     constructor() {
         // Set the auth token if it exists
         this.token = storage.getItem(LOCAL_TOKEN_KEY);
+
+        // Check that it's a valid token
+        if (this.token) {
+            if (!this.isTokenValid()) {
+                this.removeToken();
+            }
+        }
+    }
+
+    isLoggedIn(): boolean {
+        return !!this.token;
     }
 
     // Makes a request to the api at the given route
@@ -22,6 +33,30 @@ class Client {
             headers: headers,
             body: authenticated ? this.token : null,
         }).then(checkStatus).then(parseJson)
+    }
+
+    setToken(token: string) {
+        this.token = token;
+        storage.setItem(LOCAL_TOKEN_KEY, token);
+    }
+
+    removeToken() {
+        this.token = null;
+        storage.removeItem(LOCAL_TOKEN_KEY);
+    }
+
+    isTokenValid(): boolean {
+        // TODO need route to check token
+        return true;
+    }
+
+    login() {
+        // TODO add login
+    }
+
+    logout() {
+        this.removeToken();
+        // TODO add logout call to api
     }
 }
 
