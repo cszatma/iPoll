@@ -14,7 +14,7 @@ type InputType = {
 
 type InputError = {
     input: InputType,
-    error: string,
+    error: ?string,
 };
 
 export type { RouteNavItem, RESTMethod, InputType, InputError };
