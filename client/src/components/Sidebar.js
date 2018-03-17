@@ -1,19 +1,26 @@
 // @flow
 
 import React from 'react';
-import { Nav } from 'reactstrap';
+import { Col, Nav } from 'reactstrap';
 
-/*
-Dashboard
-Courses
-Account
-Logout
- */
+import RouteNavLink from './RouteNavLink';
+import type { RouteNavItem } from '../types';
 
-const Sidebar = () => (
-    <Nav className="flex-column">
+type Props = {
+    items: RouteNavItem[],
+};
 
-    </Nav>
+
+const Sidebar = ({ items }: Props) => (
+    <Col md={{ size: 3 }} className="mt-4">
+        <Nav className="flex-column">
+            {
+                items.map((item, i) => (
+                    <RouteNavLink navItem={item} key={i} />
+                ))
+            }
+        </Nav>
+    </Col>
 );
 
 export default Sidebar;
