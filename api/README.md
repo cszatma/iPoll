@@ -6,7 +6,7 @@
 |:-----:|:----:|:------:|
 /api/users | GET | Returns all Users
 /api/users | POST | Create User
-/api/users/login | POST | Authentication Login
+/api/users/login | POST | Authentication & Creates Token
 /api/users/**User.ID** | GET | Returns a user
 /api/users/owned-courses/**User.ID** | GET | Returns Courses a User created
 api/users/enrolled/**User.ID** | GET | Returns Courses a User is enrolled in
