@@ -17,4 +17,15 @@ type InputError = {
     error: ?string,
 };
 
-export type { RouteNavItem, RESTMethod, InputType, InputError };
+type InputData = {
+    name: string,
+    value: string,
+};
+
+export type {
+    RouteNavItem,
+    RESTMethod,
+    InputType,
+    InputError,
+    InputData,
+};
