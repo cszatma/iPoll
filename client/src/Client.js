@@ -50,7 +50,11 @@ class Client {
         return true;
     }
 
-    login() {
+    register(username: string, studentNumber: string, password: string) {
+        // TODO add register
+    }
+
+    login(username: string, password: string) {
         // TODO add login
     }
 
