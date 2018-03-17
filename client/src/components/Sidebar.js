@@ -12,7 +12,7 @@ type Props = {
 
 
 const Sidebar = ({ items }: Props) => (
-    <Col md={{ size: 3 }} className="mt-4">
+    <Col md="3" className="mt-4">
         <Nav className="flex-column">
             {
                 items.map((item, i) => (
