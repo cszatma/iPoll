@@ -12,6 +12,7 @@ type Props = {
     placeholder?: string,
     validate?: string => ?string,
     onChange: (InputType, string, ?string) => void,
+    invalid: boolean,
 };
 
 type State = {
@@ -22,15 +23,16 @@ type State = {
 export default class Input extends Component<Props, State> {
     static defaultProps = {
         value: '',
+        invalid: false,
     };
 
     state = {
         value: this.props.value,
-        error: false,
+        error: this.props.invalid,
     };
 
     componentWillReceiveProps(newProps: Props) {
-        this.setState({ value: newProps.value });
+        this.setState({ value: newProps.value, error: newProps.invalid });
     }
 
     onChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
