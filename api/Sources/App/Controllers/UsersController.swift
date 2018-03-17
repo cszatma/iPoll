@@ -11,9 +11,9 @@ struct UsersController: RouteCollection {
         usersRoutes.post(use: createHandler)
         usersRoutes.get(use: getAllHandler)
         usersRoutes.get(User.Public.parameter, use: getHandler)
-        usersRoutes.get("ownedCourses", User.parameter, use: getOwnedCoursesHandler)
+        usersRoutes.get("owned-courses", User.parameter, use: getOwnedCoursesHandler)
         usersRoutes.get("enrolled", User.parameter, use: getEnrolledCoursesHandler)
-        usersRoutes.post("enroll", User.parameter, "inCourse", Course.parameter, use: enrollInCoursesHandler)
+        usersRoutes.post("enroll", User.parameter, "in-course", Course.parameter, use: enrollInCoursesHandler)
 
         let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptVerifier())
         let basicAuthGroup = usersRoutes.grouped(basicAuthMiddleware)

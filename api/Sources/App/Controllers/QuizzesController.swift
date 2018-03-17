@@ -10,7 +10,7 @@ struct QuizzesController: RouteCollection {
         let quizzesRoute = router.grouped("api", "quizzes")
 
         quizzesRoute.get(use: getAllHandler)
-        quizzesRoute.post("forCourse", Course.parameter, use:createHandler)
+        quizzesRoute.post("for-course", Course.parameter, use:createHandler)
 
     }
 
