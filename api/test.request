@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>baseURL</key>
-	<string>http://localhost:8080/api/courses/2</string>
+	<string>http://localhost:8080/api/users/login</string>
 	<key>followRedirect</key>
 	<true/>
 	<key>handleJSONPCallbacks</key>
@@ -14,13 +14,13 @@
 			<key>header</key>
 			<string>Authorization</string>
 			<key>inUse</key>
-			<true/>
+			<false/>
 			<key>value</key>
-			<string>Bearer j5Qul14ygvbhCrpKZErl3A==</string>
+			<string>Bearer Zac/wS5kO5GInBvGs7BNiw==</string>
 		</dict>
 	</array>
 	<key>httpMethod</key>
-	<string>PUT</string>
+	<string>POST</string>
 	<key>jsonpScript</key>
 	<string></string>
 	<key>paramBodyUIChoice</key>
@@ -57,7 +57,7 @@
 			<key>parameter</key>
 			<string>title</string>
 			<key>value</key>
-			<string>THis is a title 2</string>
+			<string>second</string>
 		</dict>
 		<dict>
 			<key>inUse</key>
@@ -73,7 +73,7 @@
 			<key>parameter</key>
 			<string>courseCode</string>
 			<key>value</key>
-			<string>BS104</string>
+			<string>BS102</string>
 		</dict>
 		<dict>
 			<key>inUse</key>
@@ -81,15 +81,25 @@
 			<key>parameter</key>
 			<string>term</string>
 			<key>value</key>
-			<string>BS101</string>
+			<string>BS103</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>title</string>
+			<key>value</key>
+			<string>Quiz 2</string>
 		</dict>
 	</array>
 	<key>parametersType</key>
 	<integer>1</integer>
 	<key>presentBeforeChallenge</key>
-	<false/>
+	<true/>
 	<key>stringEncoding</key>
 	<integer>4</integer>
+	<key>username</key>
+	<string>Paul</string>
 	<key>usingHTTPBody</key>
 	<false/>
 </dict>

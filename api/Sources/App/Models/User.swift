@@ -1,10 +1,14 @@
+//
+// Created by Chris Bishop on 2018-03-16.
+//
+
 import Foundation
 import FluentSQLite
 import Vapor
 import Authentication
 
 final class User: Codable {
-    var id: UUID?
+    var id: Int?
     var username: String
     var studentNumber: Int
     var password: String
@@ -16,7 +20,7 @@ final class User: Codable {
     }
 
     final class Public: Codable {
-        var id: UUID?
+        var id: Int?
         var username: String
         var studentNumber: Int
 
@@ -27,10 +31,10 @@ final class User: Codable {
     }
 }
 
-extension User: SQLiteUUIDModel {}
+extension User: SQLiteModel {}
 extension User: Migration {}
 extension User: Content {}
-extension User.Public: SQLiteUUIDModel {
+extension User.Public: SQLiteModel {
     static let entity = User.entity
 }
 extension User.Public: Content {}
@@ -39,6 +43,10 @@ extension User {
     // Add Children Later
     var ownedCourses: Children<User, Course> {
         return children(\.teacherID)
+    }
+
+    var enrolledCourses: Siblings<User, Course, UserCoursePivot> {
+        return siblings()
     }
 }
 
