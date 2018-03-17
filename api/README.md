@@ -1,6 +1,4 @@
 # iPoll API: Built with Vapor 3.0 💧
-	
-## Routes
 
 ### Users
 
