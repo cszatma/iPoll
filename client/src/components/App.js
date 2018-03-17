@@ -1,24 +1,20 @@
 // @flow
 
-import React, { Component } from 'react';
+import React from 'react';
+import { Route } from 'react-router-dom';
+
 import '../styles/App.scss';
+import Login from './Login';
+import Logout from './Logout';
+import PrivateRoute from './PrivateRoute';
+import AppContainer from './AppContainer';
 
-import client from '../Client';
-
-class App extends Component<{}> {
-  render() {
-      client.request('users', 'get').then(json => console.log(json));
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+const App = () => (
+    <div>
+        <PrivateRoute exact path="/" component={AppContainer} />
+        <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
+    </div>
+);
 
 export default App;
