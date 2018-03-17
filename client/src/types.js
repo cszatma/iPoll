@@ -5,4 +5,6 @@ type RouteNavItem = {
     url: string,
 };
 
-export type { RouteNavItem };
+type RESTMethod = 'get' | 'post' | 'put' | 'options' | 'delete' | 'patch';
+
+export type { RouteNavItem, RESTMethod };
