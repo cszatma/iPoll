@@ -7,4 +7,14 @@ type RouteNavItem = {
 
 type RESTMethod = 'get' | 'post' | 'put' | 'options' | 'delete' | 'patch';
 
-export type { RouteNavItem, RESTMethod };
+type InputType = {
+    +name: string,
+    +type: string,
+};
+
+type InputError = {
+    input: InputType,
+    error: string,
+};
+
+export type { RouteNavItem, RESTMethod, InputType, InputError };
