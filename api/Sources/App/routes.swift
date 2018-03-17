@@ -27,4 +27,7 @@ public func routes(_ router: Router) throws {
     let quizzesController = QuizzesController()
     try router.register(collection: quizzesController)
 
+    let tokensController = TokensController()
+    try router.register(collection: tokensController)
+
 }
