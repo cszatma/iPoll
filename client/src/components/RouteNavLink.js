@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router';
+import { NavLink as Link } from 'react-router-dom';
 
 import type { RouteNavItem } from '../types';
 
@@ -12,7 +12,7 @@ type Props = {
 
 const RouteNavLink = ({ navItem }: Props) => (
     <NavItem>
-        <NavLink tag={Link} to={navItem.url} activeClassName="active">
+        <NavLink tag={Link} to={navItem.url} activeClassName="active" className="btn-secondary">
             {navItem.name}
         </NavLink>
     </NavItem>
