@@ -3,19 +3,20 @@
 import React, { Component } from 'react';
 import { Button, Form as RSForm, FormGroup, FormFeedback, Label } from 'reactstrap';
 
-import type { InputType, InputError, InputData } from '../types';
+import type { InputType, InputError, FormInputObject, InputData, ValidationResult } from '../types';
 import Input from './Input';
-import { capitalizeString } from '../utils';
+import { removeAndCapitalizeAll } from '../utils';
 
 type Props = {
     inputs: InputType[],
     onSubmit: InputData[] => void,
     submitText: string,
     className?: string,
+    customValidation?: FormInputObject[] => ValidationResult,
 };
 
 type State = {
-    inputs: { +type: InputType, value: string }[],
+    inputs: FormInputObject[],
     inputErrors: InputError[],
 };
 
@@ -57,6 +58,9 @@ export default class Form extends Component<Props, State> {
         // Check if any inputs are missing
         const missingInputs = inputs.map(input => !input.value);
 
+        const customValidation = this.props.customValidation;
+        const customValidationErrors = customValidation && customValidation(inputs);
+
         if (missingInputs.some(val => val)) {
             // Create a new array of errors and update the state
             const newErrors = this.state.inputErrors.map((error, i) =>
@@ -64,6 +68,15 @@ export default class Form extends Component<Props, State> {
                     input: error.input,
                     error: inputErrorMessage(error.input.name)
             } : error);
+
+            this.setState({ inputErrors: newErrors });
+            return;
+        } else if (customValidationErrors && !customValidationErrors.isValid) {
+            const errors = customValidationErrors.errors;
+            const newErrors = this.state.inputErrors.map(inputError => {
+                const index = errors.findIndex(error => error.input === inputError.input);
+                return index !== -1 ? errors[index] : inputError;
+            });
 
             this.setState({ inputErrors: newErrors });
             return;
@@ -80,7 +93,7 @@ export default class Form extends Component<Props, State> {
 
             return (
                 <FormGroup key={i}>
-                    <Label for={name}>{capitalizeString(name)}</Label>
+                    <Label for={name}>{removeAndCapitalizeAll(name)}</Label>
                     <Input
                         type={input.type}
                         value={input.value}
@@ -103,5 +116,5 @@ export default class Form extends Component<Props, State> {
 }
 
 function inputErrorMessage(name: string): string {
-    return `${capitalizeString(name)} required.`;
+    return `${removeAndCapitalizeAll(name)} required.`;
 }
