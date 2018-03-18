@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { Container } from 'reactstrap';
+import { Redirect, Link } from 'react-router-dom';
+import { Col, Container, Alert, Row } from 'reactstrap';
 
 import client from '../Client';
 import Form from './Form';
@@ -17,16 +17,18 @@ type Props = {
 type State = {
     loginInProgress: boolean,
     shouldRedirect: boolean,
+    loginError: boolean,
 };
 
 export default class Login extends Component<Props, State> {
     state = {
         loginInProgress: false,
         shouldRedirect: false,
+        loginError: false,
     };
 
     performLogin = ([username, password]: InputData[]) => {
-        this.setState({ loginInProgress: true });
+        this.setState({ loginInProgress: true, loginError: false });
 
         if (username.name !== 'username' || password.name !== 'password') {
             throw Error('Username or Password missing!');
@@ -34,8 +36,10 @@ export default class Login extends Component<Props, State> {
 
         client.login(username.value, password.value)
             .then(() => this.setState({ shouldRedirect: true }))
-            .catch(error => console.log(error));
-        // TODO add proper error handling
+            .catch(error => {
+                console.log(error);
+                this.setState({ loginInProgress: false, loginError: true });
+            });
     };
 
     redirectPath = () => {
@@ -54,17 +58,41 @@ export default class Login extends Component<Props, State> {
             return <Redirect to={this.redirectPath()}/>;
         }
 
+        const content = this.state.loginInProgress ? (
+            <div className="pt-5">
+                <CubeLoader />
+            </div>
+        ) : (
+            <Col md="10">
+                <h1>Login</h1>
+                <Form
+                    inputs={inputs}
+                    onSubmit={this.performLogin}
+                    submitText="Login"
+                    className="my-3"
+                />
+                <h5 className="pt-3">
+                    Don't have an account?&nbsp;
+                    <span className="d-block d-md-inline">
+                        Click <Link to="/register">here</Link> to register.
+                    </span>
+                </h5>
+            </Col>
+        );
+
+
         return (
-            <Container>
+            <Container className="my-3">
+                <Row className="justify-content-center">
+
                 {
-                    this.state.loginInProgress ?
-                        <CubeLoader /> :
-                        <Form
-                            inputs={inputs}
-                            onSubmit={this.performLogin}
-                            submitText="Login"
-                        />
+                    this.state.loginError ?
+                        <Alert color="danger">
+                            Unable to login. The username or password given is incorrect.
+                        </Alert> : null
                 }
+                {content}
+                </Row>
             </Container>
         );
     }
