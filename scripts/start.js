@@ -8,6 +8,12 @@ process.on('unhandledRejection', err => {
     throw err
 });
 
+// Check if yarn is available to use, otherwise use npm
+const checkYarn = spawnSync('which yarn', [], { stdio: 'inherit', shell: true });
+const packageManager  = checkYarn.status === 0 ? 'yarn' : 'npm';
+
+return;
+
 const shouldBuild = !process.argv.includes('--no-build');
 const cmd = `${shouldBuild ? 'vapor build && ' : ''}vapor run`;
 
