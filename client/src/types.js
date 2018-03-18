@@ -17,9 +17,19 @@ type InputError = {
     error: ?string,
 };
 
+type FormInputObject = {
+    +type: InputType,
+    value: string
+};
+
 type InputData = {
     name: string,
     value: string,
+};
+
+type ValidationResult = {
+    isValid: boolean,
+    errors: InputError[],
 };
 
 export type {
@@ -27,5 +37,7 @@ export type {
     RESTMethod,
     InputType,
     InputError,
+    FormInputObject,
     InputData,
+    ValidationResult,
 };
