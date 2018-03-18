@@ -7,11 +7,10 @@ import { Col, Container, Alert, Row } from 'reactstrap';
 import client from '../Client';
 import Form from './Form';
 import CubeLoader from './CubeLoader';
-import type { InputData } from '../types';
-import type { NavLink } from 'react-router-dom';
+import type { InputData } from '../utils/types';
 
 type Props = {
-    location: NavLink.location,
+    location: Link.location,
 };
 
 type State = {
@@ -23,7 +22,7 @@ type State = {
 export default class Login extends Component<Props, State> {
     state = {
         loginInProgress: false,
-        shouldRedirect: false,
+        shouldRedirect: client.isLoggedIn(),
         loginError: false,
     };
 
@@ -31,6 +30,7 @@ export default class Login extends Component<Props, State> {
         this.setState({ loginInProgress: true, loginError: false });
 
         if (username.name !== 'username' || password.name !== 'password') {
+            this.setState({ loginInProgress: false, loginError: true });
             throw Error('Username or Password missing!');
         }
 
@@ -84,7 +84,6 @@ export default class Login extends Component<Props, State> {
         return (
             <Container className="my-3">
                 <Row className="justify-content-center">
-
                 {
                     this.state.loginError ?
                         <Alert color="danger">
