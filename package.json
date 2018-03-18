@@ -8,12 +8,13 @@
     "concurrently": "^3.5.1"
   },
   "scripts": {
-    "build-api": "cd api && vapor build",
-    "build-client": "cd client && yarn run build",
-    "build": "yarn run build-api && yarn run build-client",
-    "start-api": "node start.js",
-    "start-client": "cd client && yarn run start",
-    "start": "concurrently \"yarn run start-api\" \"yarn run start-client\"",
-    "start:no-build": "concurrently \"yarn run start-api --no-build\" \"yarn run start-client\""
+    "build-api": "node scripts/build.js --api",
+    "build-client": "node scripts/build.js --client",
+    "build": "node scripts/build.js",
+    "start-api": "node scripts/start.js --api",
+    "start-client": "node scripts/start.js --client",
+    "start": "node scripts/start.js",
+    "start:no-build": "node scripts/start.js --no-build",
+    "postinstall": "node scripts/install.js"
   }
 }
