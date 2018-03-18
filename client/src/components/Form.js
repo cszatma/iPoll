@@ -11,6 +11,7 @@ type Props = {
     inputs: InputType[],
     onSubmit: InputData[] => void,
     submitText: string,
+    className?: string,
 };
 
 type State = {
@@ -93,7 +94,7 @@ export default class Form extends Component<Props, State> {
         });
 
         return (
-            <RSForm onSubmit={this.handleFormSubmit}>
+            <RSForm onSubmit={this.handleFormSubmit} className={this.props.className}>
                 {inputs}
                 <Button>{this.props.submitText}</Button>
             </RSForm>
