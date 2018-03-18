@@ -70,7 +70,7 @@ if (startApi && startClient) {
     });
 
 } else if (startApi) {
-    const apiProcess = spawn('vapor run', [], options('api'));
+    const apiProcess = spawn('vapor run', [], options('../api'));
 
     apiProcess.on('error', errorHandler);
 
@@ -80,13 +80,13 @@ if (startApi && startClient) {
         }
     });
 } else if (startClient) {
-    const clientProcess = spawn(packageManager + ' run start', [], options('client'));
+    const clientProcess = spawn(packageManager + ' run start', [], options('../client'));
 
     clientProcess.on('error', errorHandler);
 
     clientProcess.on('close', code => {
         if (code !== 0) {
-            console.log(chalk.red(`${packageManager} run build exited with code ${code}`));
+            console.log(chalk.red(`${packageManager} run start exited with code ${code}`));
         }
     });
 }
