@@ -3,9 +3,9 @@
 import React, { Component } from 'react';
 import { Button, Form as RSForm, FormGroup, FormFeedback, Label } from 'reactstrap';
 
-import type { InputType, InputError, FormInputObject, InputData, ValidationResult } from '../types';
+import type { InputType, InputError, FormInputObject, InputData, ValidationResult } from '../utils/types';
 import Input from './Input';
-import { removeAndCapitalizeAll } from '../utils';
+import { removeAndCapitalizeAll } from '../utils/functions';
 
 type Props = {
     inputs: InputType[],

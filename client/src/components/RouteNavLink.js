@@ -4,7 +4,7 @@ import React from 'react';
 import { NavItem, NavLink } from 'reactstrap';
 import { NavLink as Link } from 'react-router-dom';
 
-import type { RouteNavItem } from '../types';
+import type { RouteNavItem } from '../utils/types';
 
 type Props = {
     navItem: RouteNavItem,

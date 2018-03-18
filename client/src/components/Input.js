@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Input as RSInput } from 'reactstrap';
 
-import type { InputType } from '../types';
+import type { InputType } from '../utils/types';
 
 type Props = {
     className?: string,
