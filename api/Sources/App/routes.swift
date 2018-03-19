@@ -30,4 +30,7 @@ public func routes(_ router: Router) throws {
     let tokensController = TokensController()
     try router.register(collection: tokensController)
 
+    let questionsController = QuestionsController()
+    try router.register(collection: questionsController)
+
 }

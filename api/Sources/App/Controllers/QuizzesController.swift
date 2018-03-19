@@ -12,6 +12,8 @@ struct QuizzesController: RouteCollection {
         quizzesRoute.get(use: getAllHandler)
         quizzesRoute.post("for-course", Course.parameter, use:createHandler)
         quizzesRoute.put(Quiz.parameter, use: updateHandler)
+        quizzesRoute.get(Quiz.parameter, use: getHandler)
+        quizzesRoute.get(Quiz.parameter, "course", use: getCourseHandler)
 
 
     }
@@ -39,6 +41,12 @@ struct QuizzesController: RouteCollection {
 
     func getHandler(_ req: Request) throws -> Future<Quiz> {
         return try req.parameter(Quiz.self)
+    }
+
+    func getCourseHandler(_ req: Request) throws -> Future<Course> {
+        return try req.parameter(Quiz.self).flatMap(to: Course.self) { quiz in
+            return quiz.course.get(on: req)
+        }
     }
 
 }

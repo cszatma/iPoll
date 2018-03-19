@@ -42,6 +42,7 @@ public func configure(
     migrations.add(model: Course.self, database: .sqlite)
     migrations.add(model: UserCoursePivot.self, database: .sqlite)
     migrations.add(model: Quiz.self, database: .sqlite)
+    migrations.add(model: Question.self, database: .sqlite)
     services.register(migrations)
 
     // Configure the rest of your application here
