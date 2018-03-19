@@ -52,6 +52,7 @@ export default class Input extends Component<Props, State> {
                 placeholder={this.props.placeholder}
                 invalid={this.state.error}
                 onChange={this.onChange}
+                min={this.props.type.type === 'number' ? 1 : null}
             />
         );
     }
