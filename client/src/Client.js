@@ -1,25 +1,29 @@
 // @flow
 
-import type { RESTMethod } from './types';
+import { defaultHeaders, authorizedHeader, apiRequest, parsedApiRequest } from './utils/request';
 
 // Global constants
-const apiUrl = 'http://localhost:8080/api/';
+type CallbackFunction = boolean => void;
 const LOCAL_TOKEN_KEY = 'ipoll-api-token-auth';
-const defaultHeaders = { accept: 'application/json' };
-const storage = sessionStorage; // Use either session or local storage
+const storage = localStorage; // Use either session or local storage
 
 class Client {
     token: ?string;
+    subscribers: CallbackFunction[];
 
     constructor() {
         // Set the auth token if it exists
         this.token = storage.getItem(LOCAL_TOKEN_KEY);
+        this.subscribers = [];
 
         // Check that it's a valid token
         if (this.token) {
-            if (!this.isTokenValid()) {
-                this.removeToken();
-            }
+            this.isTokenValid().then(isValid => {
+                if (!isValid) {
+                    this.removeToken();
+                    this.notifySubscribers();
+                }
+            });
         }
     }
 
@@ -27,64 +31,65 @@ class Client {
         return !!this.token;
     }
 
-    // Makes a request to the api at the given route
-    request(route: string, method: RESTMethod, authenticated: boolean = false, headers: HeadersInit = defaultHeaders): Promise<any> {
-        return fetch(apiUrl + route, {
-            headers: headers,
-            body: authenticated ? this.token : null,
-        }).then(checkStatus).then(parseJson)
-    }
-
-    setToken(token: string) {
+    setToken(token: string): void {
         this.token = token;
         storage.setItem(LOCAL_TOKEN_KEY, token);
     }
 
-    removeToken() {
+    removeToken(): void {
         this.token = null;
         storage.removeItem(LOCAL_TOKEN_KEY);
     }
 
-    isTokenValid(): boolean {
-        // TODO need route to check token
-        return true;
+    async isTokenValid(): Promise<boolean> {
+        const token = this.token;
+
+        if (!token) {
+            return Promise.resolve(false);
+        }
+
+        const isValid = await parsedApiRequest(
+            `tokens/check-token?token=${encodeURIComponent(token)}`,
+            'get',
+            defaultHeaders
+        );
+
+        return isValid === 1;
     }
 
-    register(username: string, studentNumber: string, password: string) {
-        // TODO add register
+    register(username: string, studentNumber: number, password: string): Promise<any> {
+        const json = JSON.stringify({ username, studentNumber, password });
+        return apiRequest('users', 'post', defaultHeaders, json)
+            .then(() => this.login(username, password));
     }
 
-    login(username: string, password: string) {
-        // TODO add login
+    login(username: string, password: string): Promise<any> {
+        return parsedApiRequest('users/login', 'post', {
+            ...defaultHeaders,
+            'Authorization': 'Basic ' + btoa(`${username}:${password}`),
+        }).then(json => this.setToken(json.token));
     }
 
-    logout() {
+    logout(): Promise<void> {
+        const token = this.token;
+
+        if (!token) {
+            return Promise.resolve();
+        }
+
         this.removeToken();
-        // TODO add logout call to api
+        return apiRequest(`tokens?token=${token}`, 'delete', defaultHeaders);
     }
-}
 
-// Checks the status of a response from a HTTP request
-// If successful the response is returned, otherwise an error is thrown
-function checkStatus(response: Response): Response {
-    if (response.status >= 200 && response.status < 300) {
-        return response;
-    } else {
-        const error = new Error(`HTTP Error ${response.statusText}`);
-        error.status = response.statusText;
-        error.response = response;
-        console.log(error);
-        throw error;
+    subscribe(callback: CallbackFunction): void {
+        this.subscribers.push(callback);
     }
-}
 
-// Convenience function for parsing HTTP response as JSON
-function parseJson(response: Response): Promise<any> {
-    return response.json();
+    notifySubscribers() {
+        this.subscribers.forEach(callback => callback(this.isLoggedIn()));
+    }
 }
 
 const client = new Client();
 
 export default client;
-export { defaultHeaders };
-export type { RESTMethod };
