@@ -1,4 +1,4 @@
-# iPoll API: Built with Vapor 3.0 💧
+# iPoll API: Built with Vapor 3.0 ![v3](https://raw.githubusercontent.com/Cellane/awesome-vapor/master/img/vapor-3.png)
 
 ### Users
 
