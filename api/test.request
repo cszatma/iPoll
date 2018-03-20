@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>baseURL</key>
-	<string>http://localhost:8080/api/users/login</string>
+	<string>http://localhost:8080/api/users/</string>
 	<key>followRedirect</key>
 	<true/>
 	<key>handleJSONPCallbacks</key>
@@ -29,7 +29,7 @@
 	<array>
 		<dict>
 			<key>inUse</key>
-			<false/>
+			<true/>
 			<key>parameter</key>
 			<string>username</string>
 			<key>value</key>
@@ -37,15 +37,15 @@
 		</dict>
 		<dict>
 			<key>inUse</key>
-			<false/>
+			<true/>
 			<key>parameter</key>
-			<string>studentNumber</string>
+			<string>school</string>
 			<key>value</key>
 			<string>500791964</string>
 		</dict>
 		<dict>
 			<key>inUse</key>
-			<false/>
+			<true/>
 			<key>parameter</key>
 			<string>password</string>
 			<key>value</key>

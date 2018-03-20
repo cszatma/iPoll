@@ -16,7 +16,7 @@ struct CoursesController: RouteCollection {
         coursesRoute.get("search", use: searchHandler)
         coursesRoute.get(Course.parameter, "students", use: getStudentsHandler)
         coursesRoute.post(Course.parameter, "students", User.parameter, use:enrollInCoursesHandler)
-//        coursesRoute.get(Course.parameter, "quizzes", use: getQuizzesHandler)
+        coursesRoute.get(Course.parameter, "quizzes", use: getQuizzesHandler)
 
         // Authentication with Token
         let tokenAuthMiddleware = User.tokenAuthMiddleware()
@@ -100,12 +100,12 @@ struct CoursesController: RouteCollection {
         }
     }
 
-    // TO BE TESTED
-//    func getQuizzesHandler(_ req: Request) throws -> Future<[Quiz]> {
-//        return try req.parameter(Course.self).flatMap(to: [Quiz].self){ course in
-//            return try user.quizzes.query(on: req).all()
-//        }
-//    }
+    // TO be tested
+    func getQuizzesHandler(_ req: Request) throws -> Future<[Quiz]> {
+        return try req.parameter(Course.self).flatMap(to: [Quiz].self){ course in
+            return try course.quizzes.query(on: req).all()
+        }
+    }
 
 
 }

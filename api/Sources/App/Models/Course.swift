@@ -32,9 +32,9 @@ extension Course {
         return parent(\.teacherID)
     }
 
-//    var quizzes: Children<Course, Quiz> {
-//        return children(\.quizID)
-//    }
+    var quizzes: Children<Course, Quiz> {
+        return children(\.courseID)
+    }
 
     var students: Siblings<Course, User, UserCoursePivot> {
         return siblings()

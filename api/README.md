@@ -19,13 +19,14 @@ api/users/enrolled/**User.ID** | GET | Returns Courses a User is enrolled in
 | Route | HTTP | Action |
 |:-----:|:----:|:------:|
 /api/courses | GET | Return all courses
-/api/courses/**Course.ID** | GET | Returns a course
 /api/courses | POST | Create a Course 
+/api/courses/**Course.ID** | GET | Returns a course
 /api/course/**Course.ID**/teacher | GET | Returns the teacher of a course
 /api/courses/**Course.ID**/students | GET | Returns all students
 /api/courses/**Course.ID**/students/**User.ID** | POST | Enrolls a User in to Course
 /api/courses/**Course.ID**/ | DELETE | Deletes a course
 /api/courses/**Course.ID**/ | PUT | Updates a Course
+/api/courses/**Course.ID**/quizzes | GET | Returns all quizzes for a course
 /api/courses/search | GET | Search for a Course
    
 <br>
