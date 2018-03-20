@@ -10,23 +10,23 @@ import Authentication
 final class User: Codable {
     var id: Int?
     var username: String
-    var studentNumber: Int
+    var school: String
     var password: String
 
-    init(username: String, studentNumber: Int, password: String) {
+    init(username: String, school: String, password: String) {
         self.username = username
-        self.studentNumber = studentNumber
+        self.school = school
         self.password = password
     }
 
     final class Public: Codable {
         var id: Int?
-        var username: String
-        var studentNumber: Int
+        var username: String?
+        var school: String
 
-        init(username: String, studentNumber: Int) {
+        init(username: String, school: String) {
             self.username = username
-            self.studentNumber = studentNumber
+            self.school = school
         }
     }
 }

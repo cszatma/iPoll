@@ -12,7 +12,10 @@ struct QuestionsController: RouteCollection {
         questionsRoute.get(use: getAllHandler)
     }
 
-    func getAllHandler(_ req: Request) throws -> Future<[Questions]> {
+    // TO BE TESTED
+    func getAllHandler(_ req: Request) throws -> Future<[Question]> {
         return Question.query(on: req).all()
     }
+
+
 }

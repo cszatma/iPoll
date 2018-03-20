@@ -39,10 +39,12 @@ struct QuizzesController: RouteCollection {
         }
     }
 
+    // TO BE TESTED
     func getHandler(_ req: Request) throws -> Future<Quiz> {
         return try req.parameter(Quiz.self)
     }
 
+    // TO BE TESTED
     func getCourseHandler(_ req: Request) throws -> Future<Course> {
         return try req.parameter(Quiz.self).flatMap(to: Course.self) { quiz in
             return quiz.course.get(on: req)
