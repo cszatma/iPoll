@@ -9,20 +9,19 @@ struct CoursesController: RouteCollection {
     func boot(router: Router) throws {
         let coursesRoute = router.grouped("api", "courses")
 
-        // Unauthenticated Routes
-        coursesRoute.get(use: getAllHandler)
-        coursesRoute.get(Course.parameter, use: getHandler)
-        coursesRoute.get(Course.parameter, "teacher", use: getTeacherHandler)
-        coursesRoute.get("search", use: searchHandler)
-        coursesRoute.get(Course.parameter, "students", use: getStudentsHandler)
-        coursesRoute.post(Course.parameter, "students", User.parameter, use:enrollInCoursesHandler)
-        coursesRoute.get(Course.parameter, "quizzes", use: getQuizzesHandler)
-
         // Authentication with Token
         let tokenAuthMiddleware = User.tokenAuthMiddleware()
         let tokenAuthGroup = coursesRoute.grouped(tokenAuthMiddleware)
 
         // Authenticated Routes
+        tokenAuthGroup.get(use: getAllHandler)
+        tokenAuthGroup.get(Course.parameter, use: getHandler)
+        tokenAuthGroup.get(Course.parameter, "teacher", use: getTeacherHandler)
+        tokenAuthGroup.get("search", use: searchHandler)
+        tokenAuthGroup.get(Course.parameter, "students", use: getStudentsHandler)
+        tokenAuthGroup.post(Course.parameter, "students", User.parameter, use:enrollInCoursesHandler)
+        tokenAuthGroup.get(Course.parameter, "quizzes", use: getQuizzesHandler)
+
         tokenAuthGroup.post(use: createHandler)
         tokenAuthGroup.delete(Course.parameter, use: deleteHandler)
         tokenAuthGroup.put(Course.parameter, use: updateHandler)
@@ -100,7 +99,7 @@ struct CoursesController: RouteCollection {
         }
     }
 
-    // TO be tested
+    // WORKS
     func getQuizzesHandler(_ req: Request) throws -> Future<[Quiz]> {
         return try req.parameter(Course.self).flatMap(to: [Quiz].self){ course in
             return try course.quizzes.query(on: req).all()
