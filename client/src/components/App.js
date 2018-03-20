@@ -4,9 +4,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import '../styles/App.scss';
-import Login from './Login';
-import Logout from './Logout';
-import Register from './Register';
+import Login from './authentication/Login';
+import Logout from './authentication/Logout';
+import Register from './authentication/Register';
 import PrivateRoute from './PrivateRoute';
 import AppContainer from './AppContainer';
 

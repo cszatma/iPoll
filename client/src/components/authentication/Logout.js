@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import client from '../Client';
-import CubeLoader from './CubeLoader';
+import client from '../../Client';
+import CubeLoader from '../CubeLoader';
 
 type Props = {};
 
