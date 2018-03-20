@@ -22,16 +22,16 @@ export default class Register extends Component<{}, State> {
         registerError: false,
     };
 
-    performRegister = ([username, studentNumber, password]: InputData[]) => {
+    performRegister = ([username, school, password]: InputData[]) => {
         this.setState({ registerInProgress: true, registerError: false });
 
-        if (username.name !== 'username' || studentNumber.name !== 'student-number'
+        if (username.name !== 'username' || school.name !== 'school'
             || password.name !== 'password') {
             this.setState({ registerInProgress: false, registerError: true });
             throw Error('Username, Student Number or Password missing!');
         }
 
-        client.register(username.value, parseInt(studentNumber.value, 10), password.value)
+        client.register(username.value, school.value, password.value)
             .then(() => this.setState({ shouldRedirect: true }))
             .catch(error => {
                 console.log(error);
@@ -42,7 +42,7 @@ export default class Register extends Component<{}, State> {
     render() {
         const inputs = [
             { name: 'username', type: 'text' },
-            { name: 'student-number', type: 'number' },
+            { name: 'school', type: 'text' },
             { name: 'password', type: 'password' },
             { name: 'confirm-password', type: 'password' },
         ];

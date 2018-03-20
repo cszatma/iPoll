@@ -57,8 +57,8 @@ class Client {
         return isValid === 1;
     }
 
-    register(username: string, studentNumber: number, password: string): Promise<any> {
-        const json = JSON.stringify({ username, studentNumber, password });
+    register(username: string, school: string, password: string): Promise<any> {
+        const json = JSON.stringify({ username, school, password });
         return apiRequest('users', 'post', defaultHeaders, json)
             .then(() => this.login(username, password));
     }
