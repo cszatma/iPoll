@@ -20,6 +20,7 @@ api/users/enrolled/**User.ID** | GET | Returns Courses a User is enrolled in
 |:-----:|:----:|:------:|
 /api/courses | GET | Return all courses
 /api/courses/**Course.ID** | GET | Returns a course
+/api/courses | POST | Create a Course 
 /api/course/**Course.ID**/teacher | GET | Returns the teacher of a course
 /api/courses/**Course.ID**/students | GET | Returns all students
 /api/courses/**Course.ID**/students/**User.ID** | POST | Enrolls a User in to Course
