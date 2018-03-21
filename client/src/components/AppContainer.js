@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Container, Row } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { Route, Redirect } from 'react-router-dom';
 
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
+import Courses from './courses/Courses';
 import client from '../Client';
 
 const sidebarItems = [
@@ -27,10 +28,12 @@ export default class AppContainer extends PureComponent<{}> {
        return (
            <Container fluid>
                <Row>
-                   <Route exact path="/" render={() => <Redirect to="/dashboard"/>}/>
                    <Sidebar items={sidebarItems}/>
-                   <Route path="/dashboard" component={Dashboard}/>
-                   <p className="App-intro">iPoll</p>
+                   <Col md="9" className="mt-3">
+                       <Route exact path="/" render={() => <Redirect to="/dashboard" />}/>
+                       <Route path="/dashboard" component={Dashboard} />
+                       <Route path="/courses" component={Courses} />
+                   </Col>
                </Row>
            </Container>
        )
