@@ -1,0 +1,19 @@
+@import "../partials/variables";
+@import "../partials/mixins";
+
+.course-list {
+  display: flex;
+
+  @include media-breakpoint($md) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.course-list-item {
+  border-radius: 0 !important;
+
+  @include media-breakpoint($md) {
+    flex: 0 50%;
+  }
+}
