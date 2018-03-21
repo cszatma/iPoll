@@ -8,15 +8,19 @@ import Authentication
 struct UsersController: RouteCollection {
     func boot(router: Router) throws {
         let usersRoutes = router.grouped("api", "users")
+        // Unauthenticated Routes
         usersRoutes.post(use: createHandler)
-        usersRoutes.get(use: getAllHandler)
-        usersRoutes.get(User.Public.parameter, use: getHandler)
-        usersRoutes.get("owned-courses", User.parameter, use: getOwnedCoursesHandler)
-        usersRoutes.get("enrolled", User.parameter, use: getEnrolledCoursesHandler)
-        usersRoutes.post("enroll", User.parameter, "in-course", Course.parameter, use: enrollInCoursesHandler)
+
 
         let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptVerifier())
         let basicAuthGroup = usersRoutes.grouped(basicAuthMiddleware)
+
+        // Authenticated Routes
+        basicAuthGroup.get(use: getAllHandler)
+        basicAuthGroup.get(User.Public.parameter, use: getHandler)
+        basicAuthGroup.get("owned-courses", User.parameter, use: getOwnedCoursesHandler)
+        basicAuthGroup.get("enrolled", User.parameter, use: getEnrolledCoursesHandler)
+        basicAuthGroup.post("enroll", User.parameter, "in-course", Course.parameter, use: enrollInCoursesHandler)
         basicAuthGroup.post("login", use: loginHandler)
     }
 

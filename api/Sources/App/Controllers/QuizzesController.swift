@@ -8,12 +8,15 @@ import Vapor
 struct QuizzesController: RouteCollection {
     func boot(router: Router) throws {
         let quizzesRoute = router.grouped("api", "quizzes")
+        let tokenAuthMiddleware = User.tokenAuthMiddleware()
+        let tokenAuthGroup = quizzesRoute.grouped(tokenAuthMiddleware)
 
-        quizzesRoute.get(use: getAllHandler)
-        quizzesRoute.post("for-course", Course.parameter, use:createHandler)
-        quizzesRoute.put(Quiz.parameter, use: updateHandler)
-        quizzesRoute.get(Quiz.parameter, use: getHandler)
-        quizzesRoute.get(Quiz.parameter, "course", use: getCourseHandler)
+        // Authenticated Routes
+        tokenAuthGroup.get(use: getAllHandler)
+        tokenAuthGroup.post("for-course", Course.parameter, use:createHandler)
+        tokenAuthGroup.put(Quiz.parameter, use: updateHandler)
+        tokenAuthGroup.get(Quiz.parameter, use: getHandler)
+        tokenAuthGroup.get(Quiz.parameter, "course", use: getCourseHandler)
 
 
     }
