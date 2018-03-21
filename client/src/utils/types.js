@@ -32,6 +32,23 @@ type ValidationResult = {
     errors: InputError[],
 };
 
+type Token = {
+    id: string,
+    token: string,
+    userID: number,
+};
+
+type Course = {
+    id: number,
+    courseCode: string,
+    title: string,
+    description: string,
+    teacherID: number,
+    school: string,
+};
+
+type CourseType = 'enrolled' | 'owned';
+
 export type {
     RouteNavItem,
     RESTMethod,
@@ -40,4 +57,7 @@ export type {
     FormInputObject,
     InputData,
     ValidationResult,
+    Token,
+    Course,
+    CourseType,
 };
