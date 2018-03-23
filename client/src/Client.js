@@ -104,6 +104,16 @@ class Client {
 
         return parsedApiRequest(url, 'get', authorizedHeader(token.token));
     }
+
+    createCourse(title: string, description: string, courseCode: string): Promise<Course> {
+        const token = this.token;
+
+        if (!token) {
+            throw Error('User is not authenticated.');
+        }
+
+        return parsedApiRequest('courses', 'post', authorizedHeader(token.token), JSON.stringify({ title, description, courseCode }));
+    }
 }
 
 const client = new Client();
