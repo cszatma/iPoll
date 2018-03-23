@@ -11,16 +11,18 @@ struct UsersController: RouteCollection {
         // Unauthenticated Routes
         usersRoutes.post(use: createHandler)
 
-
-        let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptVerifier())
-        let basicAuthGroup = usersRoutes.grouped(basicAuthMiddleware)
+        let tokenAuthGroup = usersRoutes.grouped(User.tokenAuthMiddleware())
 
         // Authenticated Routes
-        basicAuthGroup.get(use: getAllHandler)
-        basicAuthGroup.get(User.Public.parameter, use: getHandler)
-        basicAuthGroup.get("owned-courses", User.parameter, use: getOwnedCoursesHandler)
-        basicAuthGroup.get("enrolled", User.parameter, use: getEnrolledCoursesHandler)
-        basicAuthGroup.post("enroll", User.parameter, "in-course", Course.parameter, use: enrollInCoursesHandler)
+        tokenAuthGroup.get(use: getAllHandler)
+        tokenAuthGroup.get(User.Public.parameter, use: getHandler)
+        tokenAuthGroup.get("owned-courses", User.parameter, use: getOwnedCoursesHandler)
+        tokenAuthGroup.get("enrolled", User.parameter, use: getEnrolledCoursesHandler)
+        tokenAuthGroup.post("enroll", User.parameter, "in-course", Course.parameter, use: enrollInCoursesHandler)
+
+        // For logging in
+        let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptVerifier())
+        let basicAuthGroup = usersRoutes.grouped(basicAuthMiddleware)
         basicAuthGroup.post("login", use: loginHandler)
     }
 
