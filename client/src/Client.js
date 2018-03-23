@@ -102,7 +102,7 @@ class Client {
         const route = type === 'enrolled' ? 'enrolled' : 'owned-courses';
         const url = `users/${route}/${token.userID}`;
 
-        return parsedApiRequest(url, 'get', defaultHeaders);
+        return parsedApiRequest(url, 'get', authorizedHeader(token.token));
     }
 }
 
