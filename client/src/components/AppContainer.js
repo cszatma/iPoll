@@ -5,6 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import Courses from './courses/Courses';
+import CreateCourse from './courses/CreateCourse';
 import client from '../Client';
 
 const sidebarItems = [
@@ -32,7 +33,8 @@ export default class AppContainer extends PureComponent<{}> {
                    <Col md="9" className="mt-3">
                        <Route exact path="/" render={() => <Redirect to="/dashboard" />}/>
                        <Route path="/dashboard" component={Dashboard} />
-                       <Route path="/courses" component={Courses} />
+                       <Route exact path="/courses" component={Courses} />
+                       <Route path="/courses/create" component={CreateCourse} />
                    </Col>
                </Row>
            </Container>
