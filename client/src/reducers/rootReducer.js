@@ -4,7 +4,7 @@ import { routerReducer } from 'react-router-redux';
 import coursesReducer from './coursesReducer';
 
 const rootReducer = combineReducers({
-    coursesReducer,
+    courses: coursesReducer,
     router: routerReducer,
 });
 
