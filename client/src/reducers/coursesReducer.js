@@ -2,18 +2,18 @@
 
 import { actionTypes } from '../utils/actionCreators';
 import type { Action } from '../utils/actionCreators';
-import type { State } from '../store';
-import { getDefaultState } from '../store';
+import type { Course } from '../utils/types';
 
-export default function coursesReducer(state: State = getDefaultState(), action: Action): State {
+type State = Course[];
+
+export default function coursesReducer(state: State = [], action: Action): State {
     if (action.type === actionTypes.addCourse) {
-        return {
-            ...state,
-            courses: [
-                ...state.courses,
+        return [
+                ...state,
                 action.course,
-            ],
-        };
+            ];
+    } else if (action.type === actionTypes.setCourses) {
+        return action.courses;
     } else {
         return state;
     }
