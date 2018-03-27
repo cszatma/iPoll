@@ -1,9 +1,17 @@
 // @flow
 
-import type { Course } from './types';
+import type { Course, CourseType } from './types';
 
-type AddCourseAction = { type: 'ADD_COURSE', course: Course };
-type SetCoursesAction = { type: 'SET_COURSES', courses: Course[] };
+type AddCourseAction = {
+    type: 'ADD_COURSE',
+    course: Course,
+    courseType: CourseType,
+};
+type SetCoursesAction = {
+    type: 'SET_COURSES',
+    courses: Course[],
+    courseType: CourseType,
+};
 
 export const actionTypes = {
     addCourse: 'ADD_COURSE',
@@ -11,17 +19,19 @@ export const actionTypes = {
 };
 
 /* Action Functions */
-function addCourse(course: Course): AddCourseAction {
+function addCourse(course: Course, courseType: CourseType): AddCourseAction {
     return {
         type: actionTypes.addCourse,
         course,
+        courseType,
     };
 }
 
-function setCourses(courses: Course[]): SetCoursesAction {
+function setCourses(courses: Course[], courseType: CourseType): SetCoursesAction {
     return {
         type: actionTypes.setCourses,
         courses,
+        courseType,
     };
 }
 /* End Action Functions */
