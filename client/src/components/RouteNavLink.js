@@ -12,7 +12,12 @@ type Props = {
 
 const RouteNavLink = ({ navItem }: Props) => (
     <NavItem>
-        <NavLink tag={Link} to={navItem.url} activeClassName="active" className="btn-secondary">
+        <NavLink
+            tag={Link}
+            to={navItem.url}
+            activeClassName="active"
+            className="btn-secondary"
+        >
             {navItem.name}
         </NavLink>
     </NavItem>

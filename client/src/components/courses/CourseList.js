@@ -14,21 +14,19 @@ type Props = {
 
 const CourseList = ({ courses, shouldLink }: Props) => (
     <ListGroup className="course-list">
-        {
-            courses && courses.length > 0 ? courses.map(course => (
+        {courses && courses.length > 0 ? (
+            courses.map(course => (
                 <ListGroupItem key={course.id} className="course-list-item">
-                    {
-                        shouldLink ?
-                            <Link
-                                to={`/courses/${course.id}`}
-                            >
-                                {course.title}
-                            </Link> :
-                            course.title
-                    }
+                    {shouldLink ? (
+                        <Link to={`/courses/${course.id}`}>{course.title}</Link>
+                    ) : (
+                        course.title
+                    )}
                 </ListGroupItem>
-            )) : <h5>No courses to display.</h5>
-        }
+            ))
+        ) : (
+            <h5>No courses to display.</h5>
+        )}
     </ListGroup>
 );
 

@@ -34,7 +34,8 @@ export default class Login extends Component<Props, State> {
             throw Error('Username or Password missing!');
         }
 
-        client.login(username.value, password.value)
+        client
+            .login(username.value, password.value)
             .then(() => this.setState({ shouldRedirect: true }))
             .catch(error => {
                 console.log(error);
@@ -44,7 +45,8 @@ export default class Login extends Component<Props, State> {
 
     redirectPath = () => {
         const locationState = this.props.location.state;
-        const pathname = locationState && locationState.from && locationState.from.pathname;
+        const pathname =
+            locationState && locationState.from && locationState.from.pathname;
         return pathname || '/dashboard';
     };
 
@@ -55,7 +57,7 @@ export default class Login extends Component<Props, State> {
         ];
 
         if (this.state.shouldRedirect) {
-            return <Redirect to={this.redirectPath()}/>;
+            return <Redirect to={this.redirectPath()} />;
         }
 
         const content = this.state.loginInProgress ? (
@@ -80,17 +82,16 @@ export default class Login extends Component<Props, State> {
             </Col>
         );
 
-
         return (
             <Container className="my-3">
                 <Row className="justify-content-center">
-                {
-                    this.state.loginError ?
+                    {this.state.loginError ? (
                         <Alert color="danger">
-                            Unable to login. The username or password given is incorrect.
-                        </Alert> : null
-                }
-                {content}
+                            Unable to login. The username or password given is
+                            incorrect.
+                        </Alert>
+                    ) : null}
+                    {content}
                 </Row>
             </Container>
         );

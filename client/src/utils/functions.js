@@ -9,11 +9,10 @@ function removeDashesAndUnderscores(str: string): string {
 }
 
 function removeAndCapitalizeAll(str: string): string {
-    return removeDashesAndUnderscores(str).split(' ').map(s => capitalizeString(s)).join(' ');
+    return removeDashesAndUnderscores(str)
+        .split(' ')
+        .map(s => capitalizeString(s))
+        .join(' ');
 }
 
-export {
-    capitalizeString,
-    removeDashesAndUnderscores,
-    removeAndCapitalizeAll,
-};
+export { capitalizeString, removeDashesAndUnderscores, removeAndCapitalizeAll };

@@ -11,24 +11,18 @@ type State = {
 
 export default function coursesReducer(
     state: State = { ownedCourses: [], enrolledCourses: [] },
-    action: Action
+    action: Action,
 ): State {
     if (action.type === actionTypes.addCourse) {
         if (action.courseType === 'owned') {
             return {
                 ...state,
-                ownedCourses: [
-                    ...state.ownedCourses,
-                    action.course,
-                ],
+                ownedCourses: [...state.ownedCourses, action.course],
             };
         } else if (action.courseType === 'enrolled') {
             return {
                 ...state,
-                enrolledCourses: [
-                    ...state.enrolledCourses,
-                    action.course,
-                ],
+                enrolledCourses: [...state.enrolledCourses, action.course],
             };
         } else {
             return state;

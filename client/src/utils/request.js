@@ -1,9 +1,12 @@
 // @flow
 
-import type { RESTMethod } from "./types";
+import type { RESTMethod } from './types';
 
 const apiUrl = 'http://localhost:8080/api/';
-const defaultHeaders = { accept: 'application/json', 'Content-Type': 'application/json' };
+const defaultHeaders = {
+    accept: 'application/json',
+    'Content-Type': 'application/json',
+};
 
 // Checks the status of a response from a HTTP request
 // If successful the response is returned, otherwise an error is thrown
@@ -31,12 +34,17 @@ function parseJson(response: Response): Promise<any> {
 function authorizedHeader(token: string): HeadersInit {
     return {
         ...defaultHeaders,
-        'Authorization': 'Bearer ' + token,
+        Authorization: 'Bearer ' + token,
     };
 }
 
 // Makes a request to the api and returns the json response
-function apiRequest(route: string, method: RESTMethod, headers: HeadersInit = defaultHeaders, body?: any): Promise<any> {
+function apiRequest(
+    route: string,
+    method: RESTMethod,
+    headers: HeadersInit = defaultHeaders,
+    body?: any,
+): Promise<any> {
     if (method === 'get' && body) {
         throw Error('get requests should not have a body');
     }
@@ -45,10 +53,15 @@ function apiRequest(route: string, method: RESTMethod, headers: HeadersInit = de
         method,
         headers,
         body,
-    }).then(checkStatus)
+    }).then(checkStatus);
 }
 
-function parsedApiRequest(route: string, method: RESTMethod, headers: HeadersInit = defaultHeaders, body?: any): Promise<any> {
+function parsedApiRequest(
+    route: string,
+    method: RESTMethod,
+    headers: HeadersInit = defaultHeaders,
+    body?: any,
+): Promise<any> {
     return apiRequest(route, method, headers, body).then(parseJson);
 }
 

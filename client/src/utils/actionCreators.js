@@ -27,7 +27,10 @@ function addCourse(course: Course, courseType: CourseType): AddCourseAction {
     };
 }
 
-function setCourses(courses: Course[], courseType: CourseType): SetCoursesAction {
+function setCourses(
+    courses: Course[],
+    courseType: CourseType,
+): SetCoursesAction {
     return {
         type: actionTypes.setCourses,
         courses,

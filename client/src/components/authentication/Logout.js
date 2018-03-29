@@ -9,7 +9,7 @@ import CubeLoader from '../CubeLoader';
 type Props = {};
 
 type State = {
-    shouldRedirect: boolean;
+    shouldRedirect: boolean,
 };
 
 export default class Logout extends Component<Props, State> {
@@ -20,7 +20,9 @@ export default class Logout extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
-        client.logout().then(() => this.setState({ shouldRedirect: true }))
+        client
+            .logout()
+            .then(() => this.setState({ shouldRedirect: true }))
             .catch(error => {
                 console.log(error);
                 this.setState({ shouldRedirect: true });
@@ -28,9 +30,10 @@ export default class Logout extends Component<Props, State> {
     }
 
     render() {
-        return (
-            this.state.shouldRedirect ?
-                <Redirect to="/login" /> : <CubeLoader/>
+        return this.state.shouldRedirect ? (
+            <Redirect to="/login" />
+        ) : (
+            <CubeLoader />
         );
     }
 }

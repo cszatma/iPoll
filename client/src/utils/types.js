@@ -19,7 +19,7 @@ type InputError = {
 
 type FormInputObject = {
     +type: InputType,
-    value: string
+    value: string,
 };
 
 type InputData = {

@@ -12,7 +12,6 @@ import registerServiceWorker from './registerServiceWorker';
 import App from './components/App';
 import store, { history } from './store';
 
-
 const router = (
     <Provider store={store}>
         <ConnectedRouter history={history}>

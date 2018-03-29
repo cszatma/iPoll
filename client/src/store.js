@@ -12,7 +12,7 @@ type State = {
 };
 
 const defaultState: State = {
-        courses: [],
+    courses: [],
 };
 
 const history = createHistory();
@@ -21,7 +21,7 @@ const middleware = routerMiddleware(history);
 const store = createStore(
     rootReducer,
     defaultState,
-    applyMiddleware(middleware)
+    applyMiddleware(middleware),
 );
 
 export { history };

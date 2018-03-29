@@ -31,18 +31,28 @@ export default class CreateCourse extends PureComponent<{}, State> {
     handleFormSubmit = ([title, description, courseCode]: InputData[]) => {
         this.setState({ creationInProgress: true });
 
-        if (title.name !== 'title' || description.name !== 'description' || courseCode.name !== 'course-code') {
+        if (
+            title.name !== 'title' ||
+            description.name !== 'description' ||
+            courseCode.name !== 'course-code'
+        ) {
             this.setState({ creationInProgress: false, creationError: true });
             throw Error('Title or Description or Course Code missing!');
         }
 
-        client.createCourse(title.value, description.value, courseCode.value).then(json => {
-            console.log(json);
-            this.setState({ shouldRedirect: true });
-        }).catch(error => {
-            console.log(error);
-            this.setState({ creationInProgress: false, creationError: true });
-        });
+        client
+            .createCourse(title.value, description.value, courseCode.value)
+            .then(json => {
+                console.log(json);
+                this.setState({ shouldRedirect: true });
+            })
+            .catch(error => {
+                console.log(error);
+                this.setState({
+                    creationInProgress: false,
+                    creationError: true,
+                });
+            });
     };
 
     render() {
@@ -64,17 +74,14 @@ export default class CreateCourse extends PureComponent<{}, State> {
 
         return (
             <Container>
-                {
-                    this.state.creationError ?
-                        <Alert color="danger">
-                            Unable to create course. Please try again.
-                        </Alert> : null
-                }
+                {this.state.creationError ? (
+                    <Alert color="danger">
+                        Unable to create course. Please try again.
+                    </Alert>
+                ) : null}
                 <h1>Create a new course</h1>
                 {content}
             </Container>
         );
     }
 }
-
-

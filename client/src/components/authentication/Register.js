@@ -7,7 +7,11 @@ import { Alert, Col, Container, Row } from 'reactstrap';
 import client from '../../Client';
 import Form from '../Form';
 import CubeLoader from '../CubeLoader';
-import type { InputData, FormInputObject, ValidationResult } from '../../utils/types';
+import type {
+    InputData,
+    FormInputObject,
+    ValidationResult,
+} from '../../utils/types';
 
 type State = {
     registerInProgress: boolean,
@@ -25,17 +29,24 @@ export default class Register extends Component<{}, State> {
     performRegister = ([username, school, password]: InputData[]) => {
         this.setState({ registerInProgress: true, registerError: false });
 
-        if (username.name !== 'username' || school.name !== 'school'
-            || password.name !== 'password') {
+        if (
+            username.name !== 'username' ||
+            school.name !== 'school' ||
+            password.name !== 'password'
+        ) {
             this.setState({ registerInProgress: false, registerError: true });
             throw Error('Username, Student Number or Password missing!');
         }
 
-        client.register(username.value, school.value, password.value)
+        client
+            .register(username.value, school.value, password.value)
             .then(() => this.setState({ shouldRedirect: true }))
             .catch(error => {
                 console.log(error);
-                this.setState({ registerInProgress: false, registerError: true });
+                this.setState({
+                    registerInProgress: false,
+                    registerError: true,
+                });
             });
     };
 
@@ -51,15 +62,20 @@ export default class Register extends Component<{}, State> {
             return <Redirect to="/dashboard" />;
         }
 
-        const customValidation = (inputs: FormInputObject[]): ValidationResult => {
+        const customValidation = (
+            inputs: FormInputObject[],
+        ): ValidationResult => {
             const [passwordInput, confirmPasswordInput] = inputs.filter(input =>
-                input.type.name.includes('password'));
+                input.type.name.includes('password'),
+            );
 
             if (passwordInput.value === confirmPasswordInput.value) {
                 return { isValid: true, errors: [] };
             }
 
-            return { isValid: false, errors: [
+            return {
+                isValid: false,
+                errors: [
                     {
                         input: confirmPasswordInput.type,
                         error: 'Passwords do not match.',
@@ -94,12 +110,11 @@ export default class Register extends Component<{}, State> {
         return (
             <Container className="my-3">
                 <Row className="justify-content-center">
-                    {
-                        this.state.registerError ?
-                            <Alert color="danger">
-                                Unable to register. Please try again.
-                            </Alert> : null
-                    }
+                    {this.state.registerError ? (
+                        <Alert color="danger">
+                            Unable to register. Please try again.
+                        </Alert>
+                    ) : null}
                     {content}
                 </Row>
             </Container>

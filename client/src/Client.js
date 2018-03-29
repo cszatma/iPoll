@@ -1,6 +1,11 @@
 // @flow
 
-import { defaultHeaders, authorizedHeader, apiRequest, parsedApiRequest } from './utils/request';
+import {
+    defaultHeaders,
+    authorizedHeader,
+    apiRequest,
+    parsedApiRequest,
+} from './utils/request';
 import type { Course, CourseType, Token } from './utils/types';
 
 // Global constants
@@ -53,22 +58,27 @@ class Client {
         const isValid = await parsedApiRequest(
             `tokens/check-token?token=${encodeURIComponent(token.token)}`,
             'get',
-            defaultHeaders
+            defaultHeaders,
         );
 
         return isValid === 1;
     }
 
-    register(username: string, school: string, password: string): Promise<void> {
+    register(
+        username: string,
+        school: string,
+        password: string,
+    ): Promise<void> {
         const json = JSON.stringify({ username, school, password });
-        return apiRequest('users', 'post', defaultHeaders, json)
-            .then(() => this.login(username, password));
+        return apiRequest('users', 'post', defaultHeaders, json).then(() =>
+            this.login(username, password),
+        );
     }
 
     login(username: string, password: string): Promise<void> {
         return parsedApiRequest('users/login', 'post', {
             ...defaultHeaders,
-            'Authorization': 'Basic ' + btoa(`${username}:${password}`),
+            Authorization: 'Basic ' + btoa(`${username}:${password}`),
         }).then(json => this.setToken(json));
     }
 
@@ -80,7 +90,11 @@ class Client {
         }
 
         this.removeToken();
-        return apiRequest(`tokens?token=${token.token}`, 'delete', defaultHeaders);
+        return apiRequest(
+            `tokens?token=${token.token}`,
+            'delete',
+            defaultHeaders,
+        );
     }
 
     subscribe(callback: CallbackFunction) {
@@ -88,8 +102,7 @@ class Client {
     }
 
     notifySubscribers() {
-        this.subscribers.forEach(callback =>
-            callback(this.isLoggedIn()));
+        this.subscribers.forEach(callback => callback(this.isLoggedIn()));
     }
 
     getCourses(type: CourseType): Promise<Course[]> {
@@ -105,14 +118,23 @@ class Client {
         return parsedApiRequest(url, 'get', authorizedHeader(token.token));
     }
 
-    createCourse(title: string, description: string, courseCode: string): Promise<Course> {
+    createCourse(
+        title: string,
+        description: string,
+        courseCode: string,
+    ): Promise<Course> {
         const token = this.token;
 
         if (!token) {
             throw Error('User is not authenticated.');
         }
 
-        return parsedApiRequest('courses', 'post', authorizedHeader(token.token), JSON.stringify({ title, description, courseCode }));
+        return parsedApiRequest(
+            'courses',
+            'post',
+            authorizedHeader(token.token),
+            JSON.stringify({ title, description, courseCode }),
+        );
     }
 }
 

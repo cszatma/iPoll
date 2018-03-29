@@ -16,7 +16,7 @@ import actionCreators from '../utils/actionCreators';
 
 type Props = {
     courses: Course[],
-    setCourses: Course[] => void,
+    setCourses: (Course[]) => void,
 };
 
 type State = {
@@ -30,11 +30,11 @@ const sidebarItems = [
     { name: 'Logout', url: '/logout' },
 ];
 
-class AppContainer extends PureComponent<Props,State> {
+class AppContainer extends PureComponent<Props, State> {
     state = {
         fetchInProgress: false,
     };
-    
+
     constructor(props: {}) {
         super(props);
         client.subscribe(isValid => !isValid && this.forceUpdate());
@@ -56,7 +56,9 @@ class AppContainer extends PureComponent<Props,State> {
 
     findCourse(id: number): Course {
         const { ownedCourses, enrolledCourses } = this.props.courses;
-        return [...ownedCourses, ...enrolledCourses].find(course => course.id === id);
+        return [...ownedCourses, ...enrolledCourses].find(
+            course => course.id === id,
+        );
     }
 
     render() {
@@ -71,29 +73,45 @@ class AppContainer extends PureComponent<Props,State> {
         return (
             <Container fluid>
                 <Row>
-                    <Sidebar items={sidebarItems}/>
-                        <Col md="9" className="mt-3">
-                            <Switch>
-                                <Route exact path="/" render={() => <Redirect to="/dashboard" />}/>
-                                <Route path="/dashboard" component={Dashboard} />
-                                <Route exact path="/courses" render={(routeProps) => (
+                    <Sidebar items={sidebarItems} />
+                    <Col md="9" className="mt-3">
+                        <Switch>
+                            <Route
+                                exact
+                                path="/"
+                                render={() => <Redirect to="/dashboard" />}
+                            />
+                            <Route path="/dashboard" component={Dashboard} />
+                            <Route
+                                exact
+                                path="/courses"
+                                render={routeProps => (
                                     <Courses
                                         {...routeProps}
                                         ownedCourses={ownedCourses}
                                         enrolledCourses={enrolledCourses}
                                     />
-                                )}/>
-                                <Route path="/courses/create" component={CreateCourse} />
-                                <Route path="/courses/:courseId" render={({ match }) => {
-                                    const course = this.findCourse(parseInt(match.params.courseId, 10));
+                                )}
+                            />
+                            <Route
+                                path="/courses/create"
+                                component={CreateCourse}
+                            />
+                            <Route
+                                path="/courses/:courseId"
+                                render={({ match }) => {
+                                    const course = this.findCourse(
+                                        parseInt(match.params.courseId, 10),
+                                    );
                                     return <CourseDetails course={course} />;
-                                }} />
-                                <Route component={NotFound} />
-                            </Switch>
-                        </Col>
+                                }}
+                            />
+                            <Route component={NotFound} />
+                        </Switch>
+                    </Col>
                 </Row>
             </Container>
-        )
+        );
     }
 }
 
@@ -105,7 +123,8 @@ function mapStateToProps(state: State): Props {
 
 function mapDispatchToProps(dispatch: Dispatch) {
     return {
-        setCourses: (courses, courseType) => dispatch(actionCreators.setCourses(courses, courseType)),
+        setCourses: (courses, courseType) =>
+            dispatch(actionCreators.setCourses(courses, courseType)),
     };
 }
 
