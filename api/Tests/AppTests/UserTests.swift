@@ -47,13 +47,76 @@ final class UserTests : XCTestCase {
         XCTAssertEqual(status, 200)
     }
 
+    func testLogout() throws {
+        // Preparing to Test
+        let app = try Application()
+        let username = "Bob", school = "Ryerson", pass = "pass123"
+        let user = User(username: username,school: school, password: pass)
+        let json = try JSONEncoder().encode(user)
+        let reqBody = HTTPBody(json)
 
+        // Testing
+        let req = HTTPRequest(method: .delete, uri: "/api/tokens", version: .init(major: 1, minor: 1), headers: ["Content-Type": "application/json"], body: reqBody)
+        let res = Request.init(http: req, using: app)
+        let status = res.makeResponse().http.status
 
+        // Response is 200 OK
+        XCTAssertEqual(status, 200)
+    }
+
+    func testViewAllUsers() throws {
+        // Preparing to Test
+        let app = try Application()
+        let reqBody = HTTPBody()
+
+        // Testing
+        let req = HTTPRequest(method: .get, uri: "/api/users", version: .init(major: 1, minor: 1), headers: ["Content-Type": "application/json"], body: reqBody)
+        let res = Request.init(http: req, using: app)
+        let status = res.makeResponse().http.status
+
+        // Response is 200 OK
+        XCTAssertEqual(status, 200)
+    }
+
+    func testGetUser() throws {
+        // Preparing to Test
+        let app = try Application()
+        let reqBody = HTTPBody()
+
+        // Testing
+        let req = HTTPRequest(method: .get, uri: "/api/users/1", version: .init(major: 1, minor: 1), headers: ["Content-Type": "application/json"], body: reqBody)
+        let res = Request.init(http: req, using: app)
+        let status = res.makeResponse().http.status
+
+        // Response is 200 OK
+        XCTAssertEqual(status, 200)
+    }
+
+    func testCheckingToken() throws {
+        // Preparing to Test
+        let app = try Application()
+        let username = "Bob", school = "Ryerson", pass = "pass123"
+        let user = User(username: username,school: school, password: pass)
+        let json = try JSONEncoder().encode(user)
+        let reqBody = HTTPBody(json)
+
+        // Testing
+        let req = HTTPRequest(method: .get, uri: "/api/tokens/check-token", version: .init(major: 1, minor: 1), headers: ["Content-Type": "application/json"], body: reqBody)
+        let res = Request.init(http: req, using: app)
+        let status = res.makeResponse().http.status
+
+        // Response is 200 OK
+        XCTAssertEqual(status, 200)
+    }
 
 
     // ---------- ALL TESTS ----------
     static let allTests = [
         ("testUserGetsCreated", testThatUserGetsCreated),
         ("testAuthentication", testAuthentication),
+        ("testLogout", testLogout),
+        ("testViewAllUsers", testViewAllUsers),
+        ("testGetUser", testGetUser),
+        ("testCheckingToken", testCheckingToken),
     ]
 }

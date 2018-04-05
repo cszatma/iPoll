@@ -11,11 +11,6 @@ import XCTest
 
 
 final class CourseTests : XCTestCase {
-
-
-    // ---------- ALL TESTS ----------
-    static let allTests = [
-
-    ]
+    
 }
 
