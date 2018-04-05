@@ -12,7 +12,7 @@ import XCTest
 
 final class UserTests : XCTestCase {
 
-    func testThatUserGetsCreated() throws {
+    func testCreateUser() throws {
         // Preparing to Test
         let app = try Application()
         let username = "Bob", school = "Ryerson", pass = "pass123"
@@ -78,7 +78,7 @@ final class UserTests : XCTestCase {
         XCTAssertEqual(status, 200)
     }
 
-    func testGetUser() throws {
+    func testViewAUser() throws {
         // Preparing to Test
         let app = try Application()
         let reqBody = HTTPBody()
@@ -112,11 +112,11 @@ final class UserTests : XCTestCase {
 
     // ---------- ALL TESTS ----------
     static let allTests = [
-        ("testUserGetsCreated", testThatUserGetsCreated),
+        ("testCreateUser", testCreateUser),
         ("testAuthentication", testAuthentication),
         ("testLogout", testLogout),
         ("testViewAllUsers", testViewAllUsers),
-        ("testGetUser", testGetUser),
+        ("testViewAUser", testViewAUser),
         ("testCheckingToken", testCheckingToken),
     ]
 }
