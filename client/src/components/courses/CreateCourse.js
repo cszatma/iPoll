@@ -4,8 +4,8 @@ import React, { PureComponent } from 'react';
 import { Container, Alert } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 
-import Form from '../Form';
-import CubeLoader from '../CubeLoader';
+import Form from '../common/Form';
+import CubeLoader from '../common/CubeLoader';
 import type { InputData } from '../../utils/types';
 import client from '../../Client';
 

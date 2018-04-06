@@ -10,7 +10,7 @@ import Dashboard from './Dashboard';
 import Courses from './courses/Courses';
 import CreateCourse from './courses/CreateCourse';
 import CourseDetails from './courses/CourseDetails';
-import CubeLoader from './CubeLoader';
+import CubeLoader from './common/CubeLoader';
 import client from '../Client';
 import actionCreators from '../utils/actionCreators';
 

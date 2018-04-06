@@ -3,7 +3,7 @@
 import React from 'react';
 import { Col, Nav } from 'reactstrap';
 
-import RouteNavLink from './RouteNavLink';
+import RouteNavLink from './common/RouteNavLink';
 import type { RouteNavItem } from '../utils/types';
 
 type Props = {

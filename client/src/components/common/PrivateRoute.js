@@ -4,7 +4,7 @@ import React from 'react';
 import type { ComponentType } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import client from '../Client';
+import client from '../../Client';
 
 type Props = {
     component: ComponentType<any>,

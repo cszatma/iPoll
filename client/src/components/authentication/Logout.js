@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import client from '../../Client';
-import CubeLoader from '../CubeLoader';
+import CubeLoader from '../common/CubeLoader';
 
 type Props = {};
 

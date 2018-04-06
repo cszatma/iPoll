@@ -15,9 +15,9 @@ import type {
     FormInputObject,
     InputData,
     ValidationResult,
-} from '../utils/types';
+} from '../../utils/types';
 import Input from './Input';
-import { removeAndCapitalizeAll } from '../utils/functions';
+import { removeAndCapitalizeAll } from '../../utils/functions';
 
 type Props = {
     inputs: InputType[],

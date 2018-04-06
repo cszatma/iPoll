@@ -5,8 +5,8 @@ import { Redirect, Link } from 'react-router-dom';
 import { Alert, Col, Container, Row } from 'reactstrap';
 
 import client from '../../Client';
-import Form from '../Form';
-import CubeLoader from '../CubeLoader';
+import Form from '../common/Form';
+import CubeLoader from '../common/CubeLoader';
 import type {
     InputData,
     FormInputObject,
