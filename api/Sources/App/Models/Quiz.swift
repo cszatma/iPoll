@@ -27,4 +27,8 @@ extension Quiz {
     var course: Parent<Quiz, Course> {
         return parent(\.courseID)
     }
+
+    var questions: Children<Quiz, Question> {
+        return children(\.quizID)
+    }
 }

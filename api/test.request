@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>baseURL</key>
-	<string>http://localhost:8080/api/users/</string>
+	<string>http://localhost:8080/api/users/login</string>
 	<key>followRedirect</key>
 	<true/>
 	<key>handleJSONPCallbacks</key>
@@ -16,7 +16,7 @@
 			<key>inUse</key>
 			<false/>
 			<key>value</key>
-			<string>Bearer Zac/wS5kO5GInBvGs7BNiw==</string>
+			<string>Bearer wV+b1vJaK2cTovUFJ6Gp4Q==</string>
 		</dict>
 	</array>
 	<key>httpMethod</key>
@@ -29,7 +29,7 @@
 	<array>
 		<dict>
 			<key>inUse</key>
-			<true/>
+			<false/>
 			<key>parameter</key>
 			<string>username</string>
 			<key>value</key>
@@ -37,7 +37,7 @@
 		</dict>
 		<dict>
 			<key>inUse</key>
-			<true/>
+			<false/>
 			<key>parameter</key>
 			<string>school</string>
 			<key>value</key>
@@ -45,7 +45,7 @@
 		</dict>
 		<dict>
 			<key>inUse</key>
-			<true/>
+			<false/>
 			<key>parameter</key>
 			<string>password</string>
 			<key>value</key>
@@ -90,6 +90,62 @@
 			<string>title</string>
 			<key>value</key>
 			<string>Quiz 2</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>question</string>
+			<key>value</key>
+			<string>What is the Capital of Canada</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>optionA</string>
+			<key>value</key>
+			<string>Toronto</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>optionB</string>
+			<key>value</key>
+			<string>Ottawa</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>optionC</string>
+			<key>value</key>
+			<string>New York</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>optionD</string>
+			<key>value</key>
+			<string>None of the above</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>answer</string>
+			<key>value</key>
+			<string>Ottawa</string>
+		</dict>
+		<dict>
+			<key>inUse</key>
+			<false/>
+			<key>parameter</key>
+			<string>weight</string>
+			<key>value</key>
+			<string>3</string>
 		</dict>
 	</array>
 	<key>parametersType</key>
