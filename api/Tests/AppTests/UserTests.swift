@@ -16,7 +16,7 @@ final class UserTests : XCTestCase {
         // Preparing to Test
         let app = try Application()
         let username = "Bob", school = "Ryerson", pass = "pass123"
-        let user = User(username: username,school: school,password: pass)
+        let user = User(username: username, school: school, password: pass)
 
         let json = try JSONEncoder().encode(user)
         let reqBody = HTTPBody(json)

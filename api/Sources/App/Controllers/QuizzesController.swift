@@ -17,6 +17,7 @@ struct QuizzesController: RouteCollection {
         tokenAuthGroup.put(Quiz.parameter, use: updateHandler)
         tokenAuthGroup.get(Quiz.parameter, use: getHandler)
         tokenAuthGroup.get(Quiz.parameter, "course", use: getCourseHandler)
+        tokenAuthGroup.delete(Quiz.parameter, use: deleteHandler)
 
 
     }
@@ -34,7 +35,7 @@ struct QuizzesController: RouteCollection {
         }
     }
 
-    // To be Tested
+    // WORKS
     func updateHandler(_ req: Request) throws -> Future<Quiz> {
         return try flatMap(to: Quiz.self, req.parameter(Quiz.self), req.content.decode(QuizCreateData.self)) { quiz, updatedQuiz in
             quiz.title = updatedQuiz.title
@@ -42,15 +43,22 @@ struct QuizzesController: RouteCollection {
         }
     }
 
-    // TO BE TESTED
+    // WORKS
     func getHandler(_ req: Request) throws -> Future<Quiz> {
         return try req.parameter(Quiz.self)
     }
 
-    // TO BE TESTED
+    // WORKS
     func getCourseHandler(_ req: Request) throws -> Future<Course> {
         return try req.parameter(Quiz.self).flatMap(to: Course.self) { quiz in
             return quiz.course.get(on: req)
+        }
+    }
+
+    // WORKS
+    func deleteHandler(_ req: Request) throws -> Future<HTTPStatus> {
+        return try req.parameter(Quiz.self).flatMap(to: HTTPStatus.self) { quiz in
+            return quiz.delete(on: req).transform(to: .noContent)
         }
     }
 
