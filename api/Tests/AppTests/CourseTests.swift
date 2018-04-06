@@ -65,7 +65,7 @@ final class CourseTests : XCTestCase {
         let course = Course(title: "Intro to Software Engineering", description: "Really cool course!", courseCode: "CPS406", teacherID: 1, school: "Ryerson")
 
 
-        let json = try JSONEncoder().encode(MultiJSON(user: user, course: course))
+        let json = try JSONEncoder().encode(UserCourseJSON(user: user, course: course))
         let reqBody = HTTPBody(json)
 
         // Testing
@@ -87,7 +87,7 @@ final class CourseTests : XCTestCase {
     ]
 }
 
-class MultiJSON: Codable {
+class UserCourseJSON: Codable {
     var user: User
     var course: Course
 
