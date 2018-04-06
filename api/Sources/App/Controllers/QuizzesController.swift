@@ -18,6 +18,8 @@ struct QuizzesController: RouteCollection {
         tokenAuthGroup.get(Quiz.parameter, use: getHandler)
         tokenAuthGroup.get(Quiz.parameter, "course", use: getCourseHandler)
         tokenAuthGroup.delete(Quiz.parameter, use: deleteHandler)
+        tokenAuthGroup.put(Quiz.parameter, "publish", use: publishHandler)
+        tokenAuthGroup.put(Quiz.parameter, "unpublish", use: unpublishHandler)
 
 
     }
@@ -59,6 +61,22 @@ struct QuizzesController: RouteCollection {
     func deleteHandler(_ req: Request) throws -> Future<HTTPStatus> {
         return try req.parameter(Quiz.self).flatMap(to: HTTPStatus.self) { quiz in
             return quiz.delete(on: req).transform(to: .noContent)
+        }
+    }
+
+    // WORKS
+    func publishHandler(_ req: Request) throws -> Future<Quiz> {
+        return try req.parameter(Quiz.self).flatMap(to: Quiz.self) { quiz in
+            quiz.published = true
+            return quiz.save(on: req)
+        }
+    }
+
+    // WORKS
+    func unpublishHandler(_ req: Request) throws -> Future<Quiz> {
+        return try req.parameter(Quiz.self).flatMap(to: Quiz.self) { quiz in
+            quiz.published = false
+            return quiz.save(on: req)
         }
     }
 

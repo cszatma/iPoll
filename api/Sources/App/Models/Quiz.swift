@@ -10,10 +10,12 @@ final class Quiz: Codable {
     var id: Int?
     var courseID: Course.ID
     var title: String
+    var published: Bool
 
     init(courseID: Course.ID, title: String) {
         self.courseID = courseID
         self.title = title
+        self.published = false
     }
 }
 
