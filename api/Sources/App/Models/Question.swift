@@ -15,8 +15,9 @@ final class Question: Codable {
     var optionC: String
     var optionD: String
     var answer: String
+    var weight: Int
 
-    init(quizID: Quiz.ID, question: String, optionA: String, optionB: String, optionC: String, optionD: String, answer: String) {
+    init(quizID: Quiz.ID, question: String, optionA: String, optionB: String, optionC: String, optionD: String, answer: String, weight: Int) {
         self.quizID = quizID
         self.question = question
         self.optionA = optionA
@@ -24,6 +25,7 @@ final class Question: Codable {
         self.optionC = optionC
         self.optionD = optionD
         self.answer = answer
+        self.weight = weight
     }
 }
 
