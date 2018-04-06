@@ -49,6 +49,7 @@ export default class Input extends Component<Props, State> {
                 className={this.props.className}
                 type={this.props.type.type}
                 name={this.props.type.name}
+                value={this.state.value}
                 placeholder={this.props.placeholder}
                 invalid={this.state.error}
                 onChange={this.onChange}
