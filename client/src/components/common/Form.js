@@ -1,18 +1,30 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Button, Form as RSForm, FormGroup, FormFeedback, Label } from 'reactstrap';
+import {
+    Button,
+    Form as RSForm,
+    FormGroup,
+    FormFeedback,
+    Label,
+} from 'reactstrap';
 
-import type { InputType, InputError, FormInputObject, InputData, ValidationResult } from '../utils/types';
+import type {
+    InputType,
+    InputError,
+    FormInputObject,
+    InputData,
+    ValidationResult,
+} from '../../utils/types';
 import Input from './Input';
-import { removeAndCapitalizeAll } from '../utils/functions';
+import { removeAndCapitalizeAll } from '../../utils/functions';
 
 type Props = {
     inputs: InputType[],
-    onSubmit: InputData[] => void,
+    onSubmit: (InputData[]) => void,
     submitText: string,
     className?: string,
-    customValidation?: FormInputObject[] => ValidationResult,
+    customValidation?: (FormInputObject[]) => ValidationResult,
 };
 
 type State = {
@@ -40,7 +52,7 @@ export default class Form extends Component<Props, State> {
             inputs: [
                 ...inputs.slice(0, index),
                 { type: inputType, value },
-                ...inputs.slice(index + 1)
+                ...inputs.slice(index + 1),
             ],
             inputErrors: [
                 ...inputErrors.slice(0, index),
@@ -59,22 +71,29 @@ export default class Form extends Component<Props, State> {
         const missingInputs = inputs.map(input => !input.value);
 
         const customValidation = this.props.customValidation;
-        const customValidationErrors = customValidation && customValidation(inputs);
+        const customValidationErrors =
+            customValidation && customValidation(inputs);
 
         if (missingInputs.some(val => val)) {
             // Create a new array of errors and update the state
-            const newErrors = this.state.inputErrors.map((error, i) =>
-                missingInputs[i] ? {
-                    input: error.input,
-                    error: inputErrorMessage(error.input.name)
-            } : error);
+            const newErrors = this.state.inputErrors.map(
+                (error, i) =>
+                    missingInputs[i]
+                        ? {
+                              input: error.input,
+                              error: inputErrorMessage(error.input.name),
+                          }
+                        : error,
+            );
 
             this.setState({ inputErrors: newErrors });
             return;
         } else if (customValidationErrors && !customValidationErrors.isValid) {
             const errors = customValidationErrors.errors;
             const newErrors = this.state.inputErrors.map(inputError => {
-                const index = errors.findIndex(error => error.input === inputError.input);
+                const index = errors.findIndex(
+                    error => error.input === inputError.input,
+                );
                 return index !== -1 ? errors[index] : inputError;
             });
 
@@ -82,7 +101,10 @@ export default class Form extends Component<Props, State> {
             return;
         }
 
-        const data = inputs.map(input => ({ name: input.type.name, value: input.value }));
+        const data = inputs.map(input => ({
+            name: input.type.name,
+            value: input.value,
+        }));
         this.props.onSubmit(data);
     };
 
@@ -97,7 +119,9 @@ export default class Form extends Component<Props, State> {
                     <Input
                         type={input.type}
                         value={input.value}
-                        validate={value => value.trim() ? null : inputErrorMessage(name)}
+                        validate={value =>
+                            value.trim() ? null : inputErrorMessage(name)
+                        }
                         onChange={this.onInputChange}
                         invalid={!!error}
                     />
@@ -107,7 +131,10 @@ export default class Form extends Component<Props, State> {
         });
 
         return (
-            <RSForm onSubmit={this.handleFormSubmit} className={this.props.className}>
+            <RSForm
+                onSubmit={this.handleFormSubmit}
+                className={this.props.className}
+            >
                 {inputs}
                 <Button>{this.props.submitText}</Button>
             </RSForm>
